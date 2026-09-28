@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#06080E">
+<title>Kiran Koppusety</title>
+<meta name="description" content="Kiran Koppusety - Cybersecurity Engineer. Vulnerability management, endpoint security and cloud automation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+:root{
+  color-scheme:dark;
+  --ink:#06080E;
+  --ink-2:#0B1019;
+  --panel:#0E1522;
+  --line:#1C2A3E;
+  --line-2:#27405E;
+  --text:#D8E4F2;
+  --muted:#8193AE;
+  --dim:#56657D;
+  --cyan:#35E9FF;
+  --cyan-d:rgba(53,233,255,.14);
+  --pink:#FF2E7E;
+  --pink-d:rgba(255,46,126,.14);
+  --amber:#FFC24B;
+  --ok:#5CFFB0;
+  --display:"Chakra Petch","Segoe UI",system-ui,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"Cascadia Mono",Consolas,monospace;
+  --gut:clamp(16px,4vw,48px);
+  --max:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--ink)}
+body{margin:0;background:var(--ink);color:var(--text);font:400 16px/1.65 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--pink);color:#fff}
+a{color:var(--cyan);text-decoration:none}
+a:hover{text-decoration:underline;text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;letter-spacing:.01em}
+p{margin:0}
+.mono{font-family:var(--mono)}
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--gut)}
+
+/* ambient layers */
+.scan{pointer-events:none;position:fixed;inset:0;z-index:60;background:repeating-linear-gradient(to bottom,rgba(255,255,255,.018) 0 1px,transparent 1px 3px);mix-blend-mode:overlay}
+.glow{pointer-events:none;position:fixed;z-index:0;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(53,233,255,.07),transparent 65%);transform:translate(-50%,-50%);left:-600px;top:-600px;transition:opacity .3s}
+main,header,footer{position:relative;z-index:1}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(6,8,14,.78);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:60px}
+.brand{font:700 15px var(--display);letter-spacing:.14em;color:var(--text);display:flex;align-items:center;gap:10px}
+.brand b{color:var(--cyan)}
+.brand .dot{width:8px;height:8px;background:var(--ok);box-shadow:0 0 10px var(--ok);border-radius:50%;animation:blink 2.4s infinite}
+.nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0}
+.nav ul a{display:block;font:500 12px var(--mono);letter-spacing:.06em;color:var(--muted);padding:8px 10px;border:1px solid transparent}
+.nav ul a:hover,.nav ul a.on{color:var(--cyan);text-decoration:none;border-color:var(--line-2);background:var(--cyan-d)}
+.menu-btn{display:none;background:none;border:1px solid var(--line-2);color:var(--cyan);font:500 12px var(--mono);padding:8px 12px;cursor:pointer}
+@media (max-width:860px){
+  .menu-btn{display:block}
+  .nav ul{position:absolute;top:60px;left:0;right:0;flex-direction:column;background:var(--ink-2);border-bottom:1px solid var(--line);padding:8px var(--gut) 16px;display:none}
+  .nav ul.open{display:flex}
+}
+
+/* hero */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+#grid{position:absolute;inset:0;width:100%;height:100%;opacity:.75}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 30% 30%,transparent 30%,var(--ink) 85%);pointer-events:none}
+.hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(28px,5vw,64px);align-items:center;padding-block:clamp(56px,9vw,112px) clamp(48px,7vw,88px)}
+.tag{display:inline-flex;align-items:center;gap:10px;font:500 12px var(--mono);letter-spacing:.12em;color:var(--cyan);text-transform:uppercase;border:1px solid var(--line-2);padding:6px 12px;background:rgba(14,21,34,.7)}
+.tag i{width:6px;height:6px;background:var(--pink);box-shadow:0 0 8px var(--pink);display:block}
+.hero h1{font-size:clamp(44px,8vw,96px);line-height:.95;font-weight:700;margin-top:22px;text-transform:uppercase;letter-spacing:.005em}
+.hero h1 .l2{display:block;color:transparent;-webkit-text-stroke:1.2px var(--cyan);text-shadow:0 0 28px rgba(53,233,255,.25)}
+.glitch{position:relative;display:inline-block}
+.glitch:hover::before,.glitch:hover::after{content:attr(data-t);position:absolute;inset:0;overflow:hidden}
+.glitch:hover::before{color:var(--pink);transform:translate(-2px,0);clip-path:inset(10% 0 55% 0);animation:gl1 .5s steps(2) infinite}
+.glitch:hover::after{color:var(--cyan);transform:translate(2px,0);clip-path:inset(60% 0 8% 0);animation:gl2 .45s steps(2) infinite}
+.role{font:600 clamp(17px,2.2vw,22px) var(--display);color:var(--text);margin-top:20px;letter-spacing:.04em}
+.role .typed{color:var(--pink)}
+.role .caret{display:inline-block;width:.55em;height:1em;background:var(--pink);vertical-align:-2px;margin-left:3px;animation:blink 1s steps(1) infinite}
+.lede{color:var(--muted);max-width:56ch;margin-top:16px;font-size:17px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn{--c:var(--cyan);position:relative;display:inline-flex;align-items:center;gap:10px;font:600 13px var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:14px 20px;color:var(--ink);background:var(--c);border:0;cursor:pointer;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));transition:transform .15s,box-shadow .15s,filter .15s}
+.btn:hover{text-decoration:none;filter:brightness(1.1);transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--c);box-shadow:inset 0 0 0 1px var(--c)}
+.btn.ghost:hover{background:var(--cyan-d)}
+
+/* HUD card */
+.hud{position:relative;background:linear-gradient(180deg,rgba(14,21,34,.92),rgba(11,16,25,.92));border:1px solid var(--line-2);padding:22px;clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,22px 100%,0 calc(100% - 22px))}
+.hud-h{display:flex;justify-content:space-between;align-items:center;font:500 11px var(--mono);letter-spacing:.12em;color:var(--dim);text-transform:uppercase;padding-bottom:12px;border-bottom:1px dashed var(--line-2)}
+.hud-h .live{color:var(--ok);display:flex;gap:6px;align-items:center}
+.hud-h .live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok);animation:blink 1.6s infinite}
+.sev{display:grid;gap:14px;margin-top:16px}
+.sev-row{display:grid;grid-template-columns:78px 1fr auto;gap:12px;align-items:center;font:500 12px var(--mono)}
+.sev-row .lab{letter-spacing:.08em}
+.bar{position:relative;height:10px;background:#101a29;border:1px solid var(--line)}
+.bar span{position:absolute;inset:0 auto 0 0;width:var(--w);transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
+.sev-row .val{font-variant-numeric:tabular-nums;min-width:52px;text-align:right}
+.hud-foot{margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.kv{border:1px solid var(--line);padding:10px 12px;background:rgba(6,8,14,.5)}
+.kv small{display:block;font:500 10px var(--mono);letter-spacing:.1em;color:var(--dim);text-transform:uppercase}
+.kv b{font:600 18px var(--display);color:var(--text);font-variant-numeric:tabular-nums}
+.cve{margin-top:16px;font:400 12px/1.7 var(--mono);color:var(--muted);height:114px;overflow:hidden;border-top:1px dashed var(--line-2);padding-top:10px}
+.cve div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cve .p{color:var(--ok)}
+.cve .c{color:var(--pink)}
+.cve .h{color:var(--amber)}
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr}}
+.hero .wrap>*{min-width:0}
+@media (max-width:480px){.hud{padding:16px}.hud-foot{gap:6px}.kv b{font-size:15px}.sev-row{grid-template-columns:64px 1fr auto}}
+
+/* sections */
+section{padding-block:clamp(64px,9vw,120px);border-bottom:1px solid var(--line)}
+.sh{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:clamp(28px,4vw,48px)}
+.eyebrow{font:500 12px var(--mono);letter-spacing:.14em;color:var(--pink);text-transform:uppercase}
+.sh h2{font-size:clamp(30px,4.6vw,52px);line-height:1.02;margin-top:10px;text-transform:uppercase}
+.sh h2 em{font-style:normal;color:var(--cyan)}
+.sh p{color:var(--muted);max-width:46ch}
+
+/* about + terminal */
+.about{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(28px,4vw,56px);align-items:start}
+.about .copy{display:grid;gap:18px;color:var(--muted);font-size:17px}
+.about .copy strong{color:var(--text);font-weight:600}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.facts .kv b{font-size:15px}
+.term{background:#070B12;border:1px solid var(--line-2);box-shadow:0 0 0 1px rgba(53,233,255,.05),0 30px 80px -30px rgba(53,233,255,.25)}
+.term-bar{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);font:500 11px var(--mono);color:var(--dim);letter-spacing:.06em}
+.term-bar i{width:10px;height:10px;border-radius:50%;background:var(--line-2)}
+.term-bar i:nth-child(1){background:var(--pink)}
+.term-bar i:nth-child(2){background:var(--amber)}
+.term-bar i:nth-child(3){background:var(--ok)}
+.term-bar span{margin-left:auto}
+.term-out{height:360px;overflow-y:auto;padding:16px;font:400 13px/1.7 var(--mono);color:#B9C8DC;scrollbar-width:thin;scrollbar-color:var(--line-2) transparent}
+.term-out .ln{white-space:pre-wrap;word-break:break-word}
+.term-out .pr{color:var(--cyan)}
+.term-out .ac{color:var(--pink)}
+.term-out .ok{color:var(--ok)}
+.term-out .am{color:var(--amber)}
+.term-out .dm{color:var(--dim)}
+.term-in{display:flex;align-items:center;gap:8px;padding:12px 16px;border-top:1px solid var(--line);font:400 13px var(--mono)}
+.term-in label{color:var(--cyan);white-space:nowrap}
+.term-in input{flex:1;min-width:0;background:transparent;border:0;outline:0;color:var(--text);font:inherit;caret-color:var(--pink)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 14px}
+.chip{font:500 11px var(--mono);color:var(--muted);background:transparent;border:1px solid var(--line-2);padding:5px 9px;cursor:pointer;letter-spacing:.04em}
+.chip:hover,.chip.on{color:var(--ink);background:var(--cyan);border-color:var(--cyan)}
+@media (max-width:900px){.about{grid-template-columns:1fr}}
+
+/* impact */
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.metric{background:var(--ink);padding:28px 24px;display:grid;gap:8px;align-content:start;position:relative;overflow:hidden;transition:background .25s}
+.metric:hover{background:var(--ink-2)}
+.metric::before{content:"";position:absolute;left:0;top:0;height:2px;width:0;background:var(--c,var(--cyan));box-shadow:0 0 12px var(--c,var(--cyan));transition:width .5s}
+.metric:hover::before{width:100%}
+.metric .n{font:700 clamp(40px,5vw,60px)/1 var(--display);color:var(--c,var(--cyan));font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.metric .n small{font-size:.5em;margin-left:2px}
+.metric h3{font:600 15px var(--body);color:var(--text);letter-spacing:0}
+.metric p{font-size:14px;color:var(--muted)}
+.metric .src{font:500 10px var(--mono);letter-spacing:.1em;color:var(--dim);text-transform:uppercase;margin-top:6px}
+@media (max-width:960px){.metrics{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.metrics{grid-template-columns:1fr}}
+
+/* pipeline */
+.pipe{display:grid;grid-template-columns:repeat(6,1fr);gap:0;position:relative}
+.pipe::before{content:"";position:absolute;left:0;right:0;top:27px;height:1px;background:linear-gradient(90deg,var(--cyan),var(--pink))}
+.stage{position:relative;background:none;border:0;color:var(--muted);text-align:left;cursor:pointer;padding:0 12px 0 0;font:inherit}
+.stage .node{position:relative;width:54px;height:54px;display:grid;place-items:center;background:var(--ink);border:1px solid var(--line-2);font:600 14px var(--mono);color:var(--muted);clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));transition:all .2s}
+.stage .nm{display:block;font:600 16px var(--display);margin-top:14px;color:var(--text);letter-spacing:.04em;text-transform:uppercase}
+.stage .sub{display:block;font:400 12px var(--mono);color:var(--dim);margin-top:4px}
+.stage:hover .node{border-color:var(--cyan);color:var(--cyan)}
+.stage[aria-selected="true"] .node{background:var(--cyan);color:var(--ink);border-color:var(--cyan);box-shadow:0 0 24px rgba(53,233,255,.5)}
+.stage[aria-selected="true"] .nm{color:var(--cyan)}
+.stage-panel{margin-top:36px;display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:start}
+.stage-panel .hud h3{font-size:24px;text-transform:uppercase;margin-top:14px}
+.stage-panel .hud p{color:var(--muted);margin-top:10px;max-width:60ch}
+.stage-panel ul{margin:16px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+.stage-panel li{position:relative;padding-left:22px;color:var(--text);font-size:15px}
+.stage-panel li::before{content:">";position:absolute;left:0;color:var(--pink);font-family:var(--mono)}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.pill{font:500 12px var(--mono);padding:6px 10px;border:1px solid var(--line-2);color:var(--cyan);background:var(--cyan-d)}
+.pill.p{color:var(--pink);background:var(--pink-d);border-color:rgba(255,46,126,.35)}
+.side-note{border:1px solid var(--line);padding:20px;background:var(--ink-2)}
+.side-note small{font:500 11px var(--mono);letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+.side-note p{color:var(--muted);margin-top:8px;font-size:15px}
+.side-note .big{font:700 34px var(--display);color:var(--pink);margin-top:6px}
+@media (max-width:900px){
+  .pipe{grid-template-columns:repeat(3,1fr);row-gap:28px}
+  .pipe::before{display:none}
+  .stage-panel{grid-template-columns:1fr}
+}
+@media (max-width:480px){.pipe{grid-template-columns:repeat(2,1fr)}}
+
+/* experience */
+.exp{display:grid;grid-template-columns:280px 1fr;gap:32px;align-items:start}
+.tabs{display:grid;gap:6px;position:sticky;top:84px}
+.tab{text-align:left;background:transparent;border:1px solid var(--line);padding:14px 16px;cursor:pointer;color:var(--muted);font:inherit;display:grid;gap:2px;transition:all .2s}
+.tab b{font:600 15px var(--display);color:var(--text);letter-spacing:.03em}
+.tab small{font:400 12px var(--mono);color:var(--dim)}
+.tab:hover{border-color:var(--line-2);background:var(--ink-2)}
+.tab[aria-selected="true"]{border-color:var(--cyan);background:var(--cyan-d);box-shadow:inset 3px 0 0 var(--cyan)}
+.tab[aria-selected="true"] b{color:var(--cyan)}
+.job{display:none}
+.job.on{display:block;animation:rise .35s ease}
+.job-h{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:baseline;justify-content:space-between;padding-bottom:16px;border-bottom:1px dashed var(--line-2)}
+.job-h h3{font-size:clamp(22px,3vw,30px);text-transform:uppercase}
+.job-h h3 span{color:var(--cyan)}
+.job-h .meta{font:500 12px var(--mono);color:var(--dim);letter-spacing:.06em}
+.job .sum{color:var(--muted);margin-top:16px;max-width:70ch}
+.job ul{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:12px}
+.job li{display:grid;grid-template-columns:28px 1fr;gap:8px;color:var(--text);font-size:15.5px}
+.job li::before{content:attr(data-i);font:500 11px/2.1 var(--mono);color:var(--pink)}
+.job .tools{margin-top:22px}
+@media (max-width:860px){.exp{grid-template-columns:1fr}.tabs{position:static;grid-template-columns:repeat(2,1fr)}}
+@media (max-width:420px){.tabs{grid-template-columns:1fr}}
+
+/* stack */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.stack{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.sk{border:1px solid var(--line);background:var(--ink-2);padding:18px;transition:border-color .2s,opacity .25s,transform .25s}
+.sk:hover{border-color:var(--line-2)}
+.sk.dim{opacity:.22;transform:scale(.985)}
+.sk h3{font:600 14px var(--mono);letter-spacing:.1em;color:var(--cyan);text-transform:uppercase}
+.sk .items{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.sk .items span{font-size:13.5px;color:var(--text);border:1px solid var(--line);padding:4px 9px;background:var(--ink)}
+.certs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+.cert{position:relative;padding:22px;border:1px solid var(--line-2);background:linear-gradient(135deg,rgba(255,46,126,.07),transparent 60%),var(--ink-2);clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,0 100%)}
+.cert small{font:500 11px var(--mono);letter-spacing:.12em;color:var(--pink);text-transform:uppercase}
+.cert h3{font-size:19px;margin-top:8px;line-height:1.25}
+.cert p{font-size:13px;color:var(--muted);margin-top:6px;font-family:var(--mono)}
+.edu{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.edu .kv b{font-size:16px;display:block;margin-top:4px}
+.edu .kv span{font-size:13px;color:var(--muted)}
+@media (max-width:860px){.certs,.edu{grid-template-columns:1fr}}
+
+/* case files */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.case{position:relative;border:1px solid var(--line);background:var(--ink-2);padding:24px;display:grid;gap:12px;align-content:start;transition:transform .25s,border-color .25s;transform-style:preserve-3d}
+.case:hover{border-color:var(--cyan)}
+.case .id{font:500 11px var(--mono);letter-spacing:.12em;color:var(--dim);display:flex;justify-content:space-between}
+.case .id b{color:var(--pink);font-weight:500}
+.case h3{font-size:22px;line-height:1.15;text-transform:uppercase}
+.case .res{font:700 30px var(--display);color:var(--cyan)}
+.case p{color:var(--muted);font-size:15px}
+.case dl{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;margin:4px 0 0;font-size:14px}
+.case dt{font:500 11px/1.9 var(--mono);color:var(--dim);letter-spacing:.08em;text-transform:uppercase}
+.case dd{margin:0;color:var(--text)}
+@media (max-width:960px){.cases{grid-template-columns:1fr}}
+
+/* notes */
+.notes{display:grid;gap:12px}
+.note{border:1px solid var(--line);background:var(--ink-2)}
+.note summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;padding:20px 22px}
+.note summary::-webkit-details-marker{display:none}
+.note summary .t{font:500 11px var(--mono);color:var(--pink);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.note summary h3{font-size:clamp(18px,2.2vw,22px);line-height:1.25}
+.note summary .x{font:500 18px var(--mono);color:var(--cyan);transition:transform .2s}
+.note[open]{border-color:var(--line-2)}
+.note[open] summary .x{transform:rotate(45deg)}
+.note .body{padding:0 22px 24px;display:grid;gap:12px;color:var(--muted);max-width:78ch}
+.note .body strong{color:var(--text)}
+.note code{font:500 13px var(--mono);color:var(--cyan);background:var(--cyan-d);padding:1px 6px}
+@media (max-width:600px){.note summary{grid-template-columns:1fr auto}.note summary .t{grid-column:1/-1}}
+
+/* contact */
+.contact{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:center}
+.contact h2{font-size:clamp(36px,6vw,76px);line-height:.98;text-transform:uppercase}
+.contact h2 span{color:var(--pink)}
+.contact p{color:var(--muted);margin-top:18px;max-width:48ch;font-size:17px}
+.mail{display:flex;align-items:center;gap:0;margin-top:26px;border:1px solid var(--line-2);max-width:100%;width:fit-content}
+.mail code{font:500 clamp(13px,2vw,16px) var(--mono);color:var(--text);padding:14px 16px;user-select:all;overflow-wrap:anywhere}
+.mail button{border:0;border-left:1px solid var(--line-2);background:var(--cyan-d);color:var(--cyan);font:600 12px var(--mono);letter-spacing:.08em;padding:0 16px;align-self:stretch;cursor:pointer;text-transform:uppercase}
+.mail button:hover{background:var(--cyan);color:var(--ink)}
+.status{display:grid;gap:10px}
+.status .kv{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.status .kv b{font-size:15px}
+.status .on{color:var(--ok)}
+@media (max-width:860px){.contact{grid-template-columns:1fr}}
+
+footer{padding-block:28px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font:400 12px var(--mono);color:var(--dim)}
+
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);opacity:0;z-index:70;background:var(--cyan);color:var(--ink);font:600 12px var(--mono);letter-spacing:.08em;padding:10px 16px;transition:all .25s;pointer-events:none}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+.reveal{transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .7s}
+.case.reveal{transition:transform .25s,opacity .7s,border-color .25s}
+.reveal.pre{transform:translateY(14px)}
+
+
+/* ---------- landing ---------- */
+body.locked{overflow:hidden}
+.landing{position:fixed;inset:0;z-index:80;background:radial-gradient(ellipse at 50% 42%,#0C1628 0%,#070B13 55%,var(--ink) 100%);display:grid;place-items:center;overflow:hidden;padding-inline:var(--gut);clip-path:circle(150% at var(--ox,50%) var(--oy,50%))}
+.landing.opening{clip-path:circle(0% at var(--ox,50%) var(--oy,50%));transition:clip-path 1.15s cubic-bezier(.75,0,.2,1)}
+#net{position:absolute;inset:0;width:100%;height:100%}
+.l-frame{position:absolute;inset:16px;pointer-events:none;opacity:.7;
+  background:
+   linear-gradient(var(--cyan),var(--cyan)) top left/22px 1px no-repeat,
+   linear-gradient(var(--cyan),var(--cyan)) top left/1px 22px no-repeat,
+   linear-gradient(var(--cyan),var(--cyan)) top right/22px 1px no-repeat,
+   linear-gradient(var(--cyan),var(--cyan)) top right/1px 22px no-repeat,
+   linear-gradient(var(--pink),var(--pink)) bottom left/22px 1px no-repeat,
+   linear-gradient(var(--pink),var(--pink)) bottom left/1px 22px no-repeat,
+   linear-gradient(var(--pink),var(--pink)) bottom right/22px 1px no-repeat,
+   linear-gradient(var(--pink),var(--pink)) bottom right/1px 22px no-repeat}
+.l-scan{position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(53,233,255,.55),transparent);box-shadow:0 0 18px rgba(53,233,255,.4);animation:sweep 7s linear infinite;pointer-events:none}
+.l-center{position:relative;z-index:2;text-align:center;display:grid;justify-items:center;gap:16px;transition:transform .9s cubic-bezier(.7,0,.2,1),opacity .6s}
+.landing.opening .l-center{transform:scale(1.12);opacity:0}
+.l-tag{font:500 11px var(--mono);letter-spacing:.32em;color:var(--cyan);text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.l-tag::before,.l-tag::after{content:"";width:28px;height:1px;background:var(--line-2)}
+.l-name{font:700 clamp(40px,11vw,158px)/.88 var(--display);text-transform:uppercase;letter-spacing:.015em;margin:0}
+.l-name span{display:block}
+.l-name .o{color:transparent;-webkit-text-stroke:1.3px var(--cyan);text-shadow:0 0 40px rgba(53,233,255,.18)}
+.l-sub{font:500 clamp(11px,1.5vw,13px) var(--mono);letter-spacing:.28em;color:var(--muted);text-transform:uppercase;max-width:90vw}
+.l-sub b{color:var(--pink);font-weight:500}
+.enter{position:relative;margin-top:22px;width:128px;height:128px;border-radius:50%;border:1px solid var(--line-2);background:rgba(6,8,14,.55);color:var(--cyan);font:600 12px var(--mono);letter-spacing:.24em;cursor:pointer;display:grid;place-items:center;transition:background .25s,color .25s,box-shadow .25s,transform .25s;padding:0 0 0 .24em}
+.enter::before,.enter::after{content:"";position:absolute;inset:-1px;border-radius:50%;border:1px solid var(--cyan);opacity:0;animation:ring 3s cubic-bezier(.2,.6,.3,1) infinite}
+.enter::after{animation-delay:1.5s;border-color:var(--pink)}
+.enter svg{position:absolute;inset:-12px;width:calc(100% + 24px);height:calc(100% + 24px);animation:spin 18s linear infinite;pointer-events:none}
+.enter:hover{background:var(--cyan);color:var(--ink);box-shadow:0 0 50px rgba(53,233,255,.45);transform:scale(1.04)}
+.l-alt{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:6px}
+.l-alt small{font:400 11px var(--mono);letter-spacing:.14em;color:var(--dim);text-transform:uppercase}
+.l-silent{background:none;border:0;color:var(--muted);font:400 12px var(--mono);letter-spacing:.08em;cursor:pointer;padding:6px 8px;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--line-2)}
+.l-silent:hover{color:var(--cyan)}
+.l-c{position:absolute;z-index:2;font:500 10.5px/1.7 var(--mono);color:var(--dim);letter-spacing:.14em;text-transform:uppercase;pointer-events:none}
+.l-c.tl{top:calc(34px + env(safe-area-inset-top,0px));left:calc(var(--gut) + 18px)}
+.l-c.tr{top:calc(34px + env(safe-area-inset-top,0px));right:calc(var(--gut) + 18px);text-align:right}
+.l-c.bl{bottom:calc(34px + env(safe-area-inset-bottom,0px));left:calc(var(--gut) + 18px)}
+.l-c.br{bottom:calc(34px + env(safe-area-inset-bottom,0px));right:calc(var(--gut) + 18px);text-align:right}
+.l-c b{color:var(--cyan);font-weight:500}
+@media (max-width:560px){.l-c.tr,.l-c.bl{display:none}}
+body.entered .nav,body.entered main{animation:siteIn 1s cubic-bezier(.2,.8,.2,1) both}
+@keyframes siteIn{from{opacity:0;transform:scale(.985)}to{opacity:1;transform:none}}
+@keyframes ring{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.7);opacity:0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes sweep{0%{top:0}100%{top:100%}}
+
+/* sound toggle */
+.nav .wrap{justify-content:flex-start}
+.nav ul{margin-left:auto}
+.snd{display:flex;align-items:center;gap:8px;background:none;border:1px solid var(--line-2);color:var(--muted);font:500 11px var(--mono);letter-spacing:.1em;padding:8px 10px;cursor:pointer;margin-left:8px}
+.snd:hover{color:var(--cyan);border-color:var(--cyan)}
+.snd .eq{display:flex;align-items:flex-end;gap:2px;height:12px}
+.snd .eq i{width:2px;height:3px;background:currentColor;display:block}
+.snd[aria-pressed="true"]{color:var(--cyan);background:var(--cyan-d)}
+.snd[aria-pressed="true"] .eq i{animation:eq 1s ease-in-out infinite}
+.snd .eq i:nth-child(2){animation-delay:.2s!important}
+.snd .eq i:nth-child(3){animation-delay:.45s!important}
+.snd .eq i:nth-child(4){animation-delay:.1s!important}
+@keyframes eq{0%,100%{height:3px}50%{height:12px}}
+@media (max-width:860px){.snd{margin-left:auto}.menu-btn{margin-left:8px}}
+@media (max-width:520px){#sndLab{display:none}.brand{letter-spacing:.08em;font-size:14px}.nav .wrap{gap:10px}}
+
+@keyframes blink{50%{opacity:.25}}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes gl1{0%{clip-path:inset(12% 0 60% 0)}50%{clip-path:inset(40% 0 30% 0)}100%{clip-path:inset(70% 0 5% 0)}}
+@keyframes gl2{0%{clip-path:inset(65% 0 10% 0)}50%{clip-path:inset(5% 0 75% 0)}100%{clip-path:inset(35% 0 40% 0)}}
+@media (prefers-reduced-motion:reduce){
+  .landing.opening{clip-path:circle(0% at 50% 50%)}
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .reveal.pre{transform:none;opacity:1}
+}
+</style>
+
+</head>
+<body>
+<div class="scan" aria-hidden="true"></div>
+<div class="glow" id="glow" aria-hidden="true"></div>
+<div class="landing" id="landing" role="dialog" aria-modal="true" aria-label="Welcome">
+  <canvas id="net" aria-hidden="true"></canvas>
+  <div class="l-scan" aria-hidden="true"></div>
+  <div class="l-frame" aria-hidden="true"></div>
+  <div class="l-c tl">KK<b>//</b>SEC-OPS<br>Portfolio v2.6</div>
+  <div class="l-c tr">UTC <b id="lClock">--:--:--</b><br>Channel secure</div>
+  <div class="l-c bl">Vuln mgmt &middot; Endpoint<br>Cloud automation</div>
+  <div class="l-c br">Cincinnati, OH<br>39.10&deg;N 84.51&deg;W</div>
+  <div class="l-center">
+    <div class="l-tag">Cybersecurity Engineer</div>
+    <h1 class="l-name"><span class="scr" data-t="KIRAN">KIRAN</span><span class="o scr" data-t="KOPPUSETY">KOPPUSETY</span></h1>
+    <p class="l-sub">Find it <b>/</b> Fix it <b>/</b> Prove it</p>
+    <button type="button" class="enter" id="enterBtn" aria-label="Enter portfolio">
+      <svg viewBox="0 0 152 152" aria-hidden="true"><circle cx="76" cy="76" r="74" fill="none" stroke="#35E9FF" stroke-opacity=".35" stroke-width="1" stroke-dasharray="2 10"/><path d="M76 2 A74 74 0 0 1 150 76" fill="none" stroke="#FF2E7E" stroke-width="1.5"/></svg>
+      ENTER
+    </button>
+  </div>
+</div>
+
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="dot"></span>KIRAN<b>//</b>KOPPUSETY</a>
+    <ul id="navList">
+      <li><a href="#whoami">/whoami</a></li>
+      <li><a href="#impact">/impact</a></li>
+      <li><a href="#pipeline">/pipeline</a></li>
+      <li><a href="#log">/log</a></li>
+      <li><a href="#stack">/stack</a></li>
+      <li><a href="#cases">/cases</a></li>
+      <li><a href="#notes">/notes</a></li>
+      <li><a href="#contact">/contact</a></li>
+    </ul>
+    <button type="button" class="snd" id="sndBtn" aria-pressed="false" aria-label="Toggle sound"><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span id="sndLab">SOUND OFF</span></button>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navList">MENU</button>
+  </div>
+</header>
+
+<main id="top">
+<!-- HERO -->
+<div class="hero">
+  <canvas id="grid" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div>
+      <span class="tag"><i></i>Cybersecurity Engineer &middot; 4+ yrs</span>
+      <h1><span class="glitch" data-t="Kiran">Kiran</span><span class="l2">Koppusety</span></h1>
+      <p class="role">I <span class="typed" id="typed">close vulnerabilities at scale</span><span class="caret" aria-hidden="true"></span></p>
+      <p class="lede">I secure enterprise endpoints and cloud infrastructure by turning vulnerability data into automated fixes. Qualys finds it, Intune ships the patch, Sentinel proves it worked.</p>
+      <div class="cta">
+        <a class="btn" href="#impact">View the impact &rarr;</a>
+        <a class="btn ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+
+    <aside class="hud" aria-label="Remediation readout">
+      <div class="hud-h"><span>MTTR reduction &middot; after automation</span><span class="live">Live</span></div>
+      <div class="sev">
+        <div class="sev-row"><span class="lab" style="color:var(--pink)">CRITICAL</span><div class="bar"><span style="--w:96%;background:var(--pink);box-shadow:0 0 12px var(--pink)"></span></div><span class="val" style="color:var(--pink)">-96%</span></div>
+        <div class="sev-row"><span class="lab" style="color:var(--amber)">HIGH</span><div class="bar"><span style="--w:89%;background:var(--amber);box-shadow:0 0 12px var(--amber)"></span></div><span class="val" style="color:var(--amber)">-89%</span></div>
+      </div>
+      <div class="hud-foot">
+        <div class="kv"><small>Stack</small><b>Qualys</b></div>
+        <div class="kv"><small>Deploy</small><b>Intune</b></div>
+        <div class="kv"><small>Verify</small><b>Sentinel</b></div>
+      </div>
+      <div class="cve mono" id="feed" aria-hidden="true">
+        <div><span class="dm">[scan]</span> asset inventory synced &middot; TruRisk scored</div>
+        <div><span class="c">[crit]</span> exploited-in-wild flag &rarr; fast-track ring</div>
+        <div><span class="h">[high]</span> QDS &ge; 70 &rarr; queued for ring 1</div>
+        <div><span class="p">[pass]</span> telemetry confirms patch applied</div>
+        <div><span class="dm">[sla ]</span> remediation SLA within target</div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<!-- WHOAMI -->
+<section id="whoami">
+  <div class="wrap">
+    <div class="sh reveal">
+      <div><div class="eyebrow">/whoami</div><h2>Security engineer with a <em>builder's</em> background</h2></div>
+      <p>Mechanical engineer by degree, software engineer by trade, security engineer by choice.</p>
+    </div>
+    <div class="about">
+      <div class="copy reveal">
+        <p>I started out writing <strong>backend APIs, ETL pipelines and CI/CD</strong> for teams at Fox Corporation and Nxtwave. That work taught me how systems break, how to test them, and how to automate the boring parts.</p>
+        <p>Today I apply the same thinking to security. At Core Specialty I run <strong>enterprise vulnerability remediation</strong> across Windows endpoints and servers: prioritizing by real-world risk, automating fixes with PowerShell and Azure runbooks, rolling them out in rings, and proving the result in telemetry.</p>
+        <p>I care about security work that <strong>shows up in the numbers</strong>: shorter time to fix, fewer manual steps, lower cloud spend.</p>
+        <div class="facts">
+          <div class="kv"><small>Based in</small><b>Cincinnati, OH</b></div>
+          <div class="kv"><small>Focus</small><b>VM &middot; Endpoint &middot; Cloud</b></div>
+          <div class="kv"><small>Clouds</small><b>Azure &middot; AWS</b></div>
+          <div class="kv"><small>Languages</small><b>PowerShell &middot; Python</b></div>
+        </div>
+      </div>
+
+      <div class="term reveal" id="term">
+        <div class="term-bar"><i></i><i></i><i></i><span>kiran@sec-ops: ~</span></div>
+        <div class="term-out" id="termOut" role="log" aria-live="polite"></div>
+        <div class="chips" id="termChips" aria-label="Quick commands"></div>
+        <form class="term-in" id="termForm" autocomplete="off">
+          <label for="termInput">kiran@sec-ops:~$</label>
+          <input id="termInput" type="text" spellcheck="false" placeholder="type 'help'" aria-label="Terminal command">
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section id="impact">
+  <div class="wrap">
+    <div class="sh reveal">
+      <div><div class="eyebrow">/impact</div><h2>Numbers that <em>moved</em></h2></div>
+      <p>Measured outcomes from production work, not lab exercises.</p>
+    </div>
+    <div class="metrics reveal">
+      <div class="metric" style="--c:var(--pink)"><div class="n"><span data-count="96">96</span><small>%</small></div><h3>Faster critical fixes</h3><p>MTTR cut for critical vulnerabilities with Qualys + Intune patch automation.</p><div class="src">Core Specialty</div></div>
+      <div class="metric" style="--c:var(--amber)"><div class="n"><span data-count="89">89</span><small>%</small></div><h3>Faster high-severity fixes</h3><p>Same pipeline applied to high-severity findings, improving SLA compliance.</p><div class="src">Core Specialty</div></div>
+      <div class="metric"><div class="n"><small>$</small><span data-count="85">85</span><small>K</small></div><h3>Annual cloud savings</h3><p>Terraform framework that provisions AVD and clears stale Azure resources.</p><div class="src">Core Specialty</div></div>
+      <div class="metric" style="--c:var(--ok)"><div class="n"><span data-count="80">80</span><small>%</small></div><h3>Lower API response time</h3><p>Parallel report generation with Python multiprocessing.</p><div class="src">Fox Corporation</div></div>
+      <div class="metric" style="--c:var(--ok)"><div class="n"><span data-count="4">4</span><small>x</small></div><h3>Faster page loads</h3><p>React initial load from 8s to 2s with code splitting and lazy loading.</p><div class="src">Nxtwave</div></div>
+      <div class="metric"><div class="n"><span data-count="10">10</span><small>K/day</small></div><h3>API requests served</h3><p>Node.js + PostgreSQL APIs at 0.3s response time.</p><div class="src">Nxtwave</div></div>
+      <div class="metric" style="--c:var(--amber)"><div class="n"><span data-count="70">70</span><small>%</small></div><h3>Less request wait</h3><p>Approval portal cut processing time from 20 to 6 minutes.</p><div class="src">Nxtwave</div></div>
+      <div class="metric" style="--c:var(--pink)"><div class="n"><span data-count="45">45</span><small>%</small></div><h3>Shorter ETL runtimes</h3><p>Stored procedure tuning for warehouse transformations.</p><div class="src">CloudEarl</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PIPELINE -->
+<section id="pipeline">
+  <div class="wrap">
+    <div class="sh reveal">
+      <div><div class="eyebrow">/pipeline</div><h2>How a CVE gets <em>closed</em></h2></div>
+      <p>The remediation loop I run, from first detection to the executive dashboard. Select a stage.</p>
+    </div>
+    <div class="pipe reveal" role="tablist" aria-label="Remediation stages" id="pipe"></div>
+    <div class="stage-panel reveal">
+      <div class="hud" id="stagePanel" role="tabpanel"></div>
+      <div class="side-note" id="stageNote"></div>
+    </div>
+  </div>
+</section>
+
+<!-- LOG -->
+<section id="log">
+  <div class="wrap">
+    <div class="sh reveal">
+      <div><div class="eyebrow">/log</div><h2>Career <em>log</em></h2></div>
+      <p>Four roles across security, backend, full-stack and data engineering.</p>
+    </div>
+    <div class="exp reveal">
+      <div class="tabs" role="tablist" aria-label="Roles" id="tabs"></div>
+      <div id="jobs"></div>
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section id="stack">
+  <div class="wrap">
+    <div class="sh reveal">
+      <div><div class="eyebrow">/stack</div><h2>Tools of the <em>trade</em></h2></div>
+      <p>Filter by domain to see where each tool fits.</p>
+    </div>
+    <div class="filters reveal" id="filters"></div>
+    <div class="stack reveal" id="stackGrid"></div>
+    <div class="certs reveal">
+      <div class="cert"><small>Certified</small><h3>Qualys Certified Specialist</h3><p>Vulnerability management &middot; VMDR</p></div>
+      <div class="cert"><small>Certified</small><h3>CompTIA Security+</h3><p>Core security fundamentals</p></div>
+      <div class="cert"><small>Certified</small><h3>Microsoft Cloud and AI Security Engineer Associate</h3><p>SC-500</p></div>
+    </div>
+    <div class="edu reveal">
+      <div class="kv"><small>2024 &middot; University of Central Missouri</small><b>MS, Cybersecurity and Information Assurance</b></div>
+      <div class="kv"><small>2021 &middot; Centurion University of Technology and Management</small><b>B.Tech, Mechanical Engineering</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- CASES -->
+<section id="cases">
+  <div class="wrap">
+    <div class="sh reveal">
+      <div><div class="eyebrow">/cases</div><h2>Case <em>files</em></h2></div>
+      <p>Three projects, broken down by problem, approach and result.</p>
+    </div>
+    <div class="cases">
+      <article class="case reveal tilt">
+        <div class="id"><span>CASE-001</span><b>SECURITY</b></div>
+        <h3>Patch automation that actually closes tickets</h3>
+        <div class="res">-96% MTTR</div>
+        <dl>
+          <dt>Problem</dt><dd>Critical findings sat open while patches waited on manual packaging and approvals.</dd>
+          <dt>Approach</dt><dd>Qualys findings drive Intune deployments through phased update rings, with PowerShell fixes where no patch exists.</dd>
+          <dt>Proof</dt><dd>Sentinel endpoint telemetry confirms each fix; exceptions are documented, not ignored.</dd>
+        </dl>
+      </article>
+      <article class="case reveal tilt">
+        <div class="id"><span>CASE-002</span><b>CLOUD</b></div>
+        <h3>AVD as code, stale resources out</h3>
+        <div class="res">~$85K / yr</div>
+        <dl>
+          <dt>Problem</dt><dd>Azure Virtual Desktop builds were manual, and unused resources kept billing across subscriptions.</dd>
+          <dt>Approach</dt><dd>A Terraform framework that provisions AVD environments on demand and deprovisions stale ones.</dd>
+          <dt>Result</dt><dd>Repeatable environments and roughly $85,000 a year in avoided spend.</dd>
+        </dl>
+      </article>
+      <article class="case reveal tilt">
+        <div class="id"><span>CASE-003</span><b>BACKEND</b></div>
+        <h3>Reports that stopped timing out</h3>
+        <div class="res">-80% latency</div>
+        <dl>
+          <dt>Problem</dt><dd>Advertising revenue reports ran calculations one after another behind a serverless API.</dd>
+          <dt>Approach</dt><dd>Python multiprocessing runs calculations in parallel, with distributed queues to handle transaction conflicts.</dd>
+          <dt>Result</dt><dd>80% faster responses for planners at Fox Corporation, guarded by a Pytest regression suite.</dd>
+        </dl>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- NOTES -->
+<section id="notes">
+  <div class="wrap">
+    <div class="sh reveal">
+      <div><div class="eyebrow">/notes</div><h2>Field <em>notes</em></h2></div>
+      <p>Short write-ups on the principles behind the work.</p>
+    </div>
+    <div class="notes">
+      <details class="note reveal" open>
+        <summary><span class="t">Prioritization</span><h3>CVSS tells you how bad a bug could be. Not how likely it is to hurt you.</h3><span class="x">+</span></summary>
+        <div class="body">
+          <p>A backlog sorted by CVSS alone buries the vulnerabilities that attackers are actually using. I rank work with <strong>Qualys TruRisk and QDS</strong>, then adjust for three things: is there a public exploit, is it being exploited in the wild, and how critical is the asset.</p>
+          <p>An actively exploited CVE on an internet-facing server jumps the queue even if its base score is lower than a theoretical bug on an isolated workstation. That single rule does more for real risk reduction than any SLA chart.</p>
+        </div>
+      </details>
+      <details class="note reveal">
+        <summary><span class="t">Deployment</span><h3>Fast patching needs a slow start</h3><span class="x">+</span></summary>
+        <div class="body">
+          <p>Speed comes from confidence, and confidence comes from rings. A patch goes to a small <strong>pilot ring</strong> first, then broader rings once telemetry looks clean. Every rollout has a written <strong>rollback plan</strong> before it starts.</p>
+          <p>Device targeting is automated too. Azure Automation runbooks read department and job title, then assign the right update ring, security policies and required apps. New devices land in the right place without anyone touching them.</p>
+        </div>
+      </details>
+      <details class="note reveal">
+        <summary><span class="t">Firmware</span><h3>The Secure Boot certificate rollover of 2026</h3><span class="x">+</span></summary>
+        <div class="body">
+          <p>Microsoft's original Secure Boot certificates from 2011 began expiring in 2026. Devices that never receive the 2023 replacements can lose the ability to get future boot security updates.</p>
+          <p>Firmware-level changes are high stakes, so I treated this as a <strong>production change</strong>: staged rollout, validation on representative hardware, and change-control sign-off before each wave.</p>
+        </div>
+      </details>
+      <details class="note reveal">
+        <summary><span class="t">Validation</span><h3>"Patched" is a claim. Telemetry is the evidence.</h3><span class="x">+</span></summary>
+        <div class="body">
+          <p>A deployment marked successful does not mean the vulnerable file is gone. I verify with <strong>Microsoft Sentinel</strong> endpoint data, chase down suspected false positives with the scanner team, and document a <strong>risk exception</strong> with compensating controls when a patch is not possible.</p>
+          <p>The result is a vulnerability report leadership can trust, which I publish as <strong>Power BI</strong> dashboards for security and reliability metrics.</p>
+        </div>
+      </details>
+      <details class="note reveal">
+        <summary><span class="t">Background</span><h3>What software engineering taught me about security</h3><span class="x">+</span></summary>
+        <div class="body">
+          <p>Years of shipping APIs gave me habits I still use: validate every input (I built JSON Schema validators for exactly that), write regression tests before you trust a change, and block releases that fail quality gates like <code>SonarQube</code>.</p>
+          <p>Security automation is software. It deserves the same review, testing and version control as any product code.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap contact">
+    <div class="reveal">
+      <div class="eyebrow">/contact</div>
+      <h2 style="margin-top:10px">Let's reduce <span>your</span> attack surface</h2>
+      <p>Open to cybersecurity engineering, vulnerability management and cloud security roles. The fastest way to reach me is email.</p>
+      <div class="mail"><code id="email">kirankoppusety@gmail.com</code><button type="button" id="copyEmail">Copy</button></div>
+    </div>
+    <div class="status reveal">
+      <div class="kv"><small>Status</small><b class="on">Open to opportunities</b></div>
+      <div class="kv"><small>Location</small><b>Cincinnati, OH</b></div>
+      <div class="kv"><small>Response</small><b>Usually within a day</b></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap"><span>&copy; <span id="yr">2026</span> Kiran Koppusety</span><span>Tip: try <b style="color:var(--cyan)">sudo hire kiran</b> in the terminal</span></div>
+</footer>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ---------- ASMR sound engine (Web Audio, synthesized, no files) ---------- */
+window.SFX=(function(){
+  let ctx=null,master=null,nbuf=null,on=false,amb=null,lastHover=0;
+  function init(){
+    if(ctx)return true;
+    const AC=window.AudioContext||window.webkitAudioContext; if(!AC)return false;
+    try{ctx=new AC();}catch(e){return false;}
+    const comp=ctx.createDynamicsCompressor(); comp.threshold.value=-18; comp.ratio.value=4;
+    master=ctx.createGain(); master.gain.value=0; master.connect(comp); comp.connect(ctx.destination);
+    nbuf=ctx.createBuffer(1,ctx.sampleRate*2,ctx.sampleRate);
+    const d=nbuf.getChannelData(0); for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
+    return true;
+  }
+  const ok=()=>ctx&&on;
+  function env(g,t,a,peak,dur){g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(peak,t+a);g.gain.exponentialRampToValueAtTime(0.0001,t+a+dur);}
+  function noise(freq,q,peak,dur,type,when){
+    const t=ctx.currentTime+(when||0),s=ctx.createBufferSource(),f=ctx.createBiquadFilter(),g=ctx.createGain();
+    s.buffer=nbuf;f.type=type||'bandpass';f.frequency.value=freq;f.Q.value=q;env(g,t,.002,peak,dur);
+    s.connect(f);f.connect(g);g.connect(master);s.start(t,Math.random()*1.5);s.stop(t+dur+.05);
+  }
+  function tone(freq,peak,dur,type,attack,when){
+    const t=ctx.currentTime+(when||0),o=ctx.createOscillator(),g=ctx.createGain();
+    o.type=type||'sine';o.frequency.value=freq;env(g,t,attack||.004,peak,dur);
+    o.connect(g);g.connect(master);o.start(t);o.stop(t+(attack||.004)+dur+.05);
+  }
+  const api={
+    init,
+    isOn:()=>on,
+    set(v){
+      if(v&&!init())return;
+      on=!!v;
+      if(ctx){ if(on&&ctx.state!=='running')ctx.resume();
+        master.gain.setTargetAtTime(on?.7:0,ctx.currentTime,.05);}
+      try{localStorage.setItem('kk-sound',on?'1':'0');}catch(e){}
+      document.dispatchEvent(new CustomEvent('sfx',{detail:on}));
+    },
+    /* only clicks make sound: a soft, low, muted tap */
+    click(){if(!ok())return;noise(900,0.9,.035,.028,'lowpass');tone(140,.03,.04,'sine',.003);},
+    hover(){},key(){},tick(){},chime(){},whoosh(){},open(){},ambient(){}
+  };
+  return api;
+})();
+</script>
+<script>
+(function(){
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = (s,r=document)=>r.querySelector(s);
+const $$ = (s,r=document)=>Array.from(r.querySelectorAll(s));
+const esc = s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+$('#yr').textContent = new Date().getFullYear();
+
+/* toast */
+const toast = $('#toast'); let tT;
+function say(msg){toast.textContent=msg;toast.classList.add('show');clearTimeout(tT);tT=setTimeout(()=>toast.classList.remove('show'),1800);}
+
+/* mobile menu */
+const mb=$('#menuBtn'), nl=$('#navList');
+mb.addEventListener('click',()=>{const o=nl.classList.toggle('open');mb.setAttribute('aria-expanded',o);});
+$$('#navList a').forEach(a=>a.addEventListener('click',()=>{nl.classList.remove('open');mb.setAttribute('aria-expanded','false');}));
+
+/* cursor glow */
+const glow=$('#glow');
+if(!reduce && matchMedia('(pointer:fine)').matches){
+  addEventListener('pointermove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px';},{passive:true});
+}
+
+/* hero grid canvas */
+const cv=$('#grid'), ctx=cv.getContext('2d');
+let W,H,dpr,t0=performance.now();
+function size(){dpr=Math.min(devicePixelRatio||1,2);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);}
+function draw(now){
+  const t=(now-t0)/1000;
+  ctx.clearRect(0,0,W,H);
+  const hz=H*0.52, cx=W*0.62;
+  // horizon glow
+  const g=ctx.createLinearGradient(0,hz-60,0,hz+10);
+  g.addColorStop(0,'rgba(255,46,126,0)');g.addColorStop(1,'rgba(255,46,126,.12)');
+  ctx.fillStyle=g;ctx.fillRect(0,hz-60,W,70);
+  ctx.lineWidth=1;
+  // vertical lines
+  for(let i=-24;i<=24;i++){
+    const xb=cx+i*90;
+    ctx.strokeStyle='rgba(53,233,255,'+(0.18-Math.abs(i)*0.004)+')';
+    ctx.beginPath();ctx.moveTo(cx+i*6,hz);ctx.lineTo(xb,H);ctx.stroke();
+  }
+  // horizontal lines moving
+  const sp=reduce?0:(t*0.35)%1;
+  for(let k=0;k<16;k++){
+    const p=(k+sp)/16, y=hz+Math.pow(p,2.2)*(H-hz);
+    ctx.strokeStyle='rgba(53,233,255,'+(0.04+p*0.22)+')';
+    ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();
+  }
+  // floating particles
+  for(let j=0;j<40;j++){
+    const x=(j*97.3+t*(8+j%5*3))%W, y=((j*53.7)%(hz-20))+Math.sin(t+j)*4;
+    ctx.fillStyle=j%4?'rgba(53,233,255,.35)':'rgba(255,46,126,.5)';
+    ctx.fillRect(x,y,1.5,1.5);
+  }
+  if(!reduce && gridVisible) requestAnimationFrame(draw);
+}
+let gridVisible=true;
+size();addEventListener('resize',()=>{size();if(reduce)draw(performance.now());});
+new IntersectionObserver(es=>{const v=es[0].isIntersecting;if(v&&!gridVisible){gridVisible=true;requestAnimationFrame(draw);}gridVisible=v;}).observe(cv);
+requestAnimationFrame(draw);
+
+/* typed roles */
+const roles=['close vulnerabilities at scale','automate patching with Intune','prioritize by real-world risk','build cloud infra as code','prove every fix in telemetry'];
+const typed=$('#typed');
+if(!reduce){
+  let ri=0,ci=roles[0].length,del=true;
+  (function tick(){
+    const w=roles[ri];
+    if(del){ci--;if(ci<=0){del=false;ri=(ri+1)%roles.length;}}
+    else{ci++;if(ci>=roles[ri].length){del=true;typed.textContent=roles[ri];return setTimeout(tick,2200);}}
+    typed.textContent=roles[ri].slice(0,Math.max(ci,0));
+    setTimeout(tick,del?28:55);
+  })();
+}
+
+/* live feed */
+const feedLines=[
+ ['c','[crit]','exploited CVE detected &rarr; ring 0 fast-track'],
+ ['dm','[scan]','Qualys VMDR sync &middot; TruRisk recalculated'],
+ ['h','[high]','QDS &ge; 70 &middot; bundled into next ring'],
+ ['p','[pass]','Sentinel telemetry: fix verified on endpoint'],
+ ['dm','[rbk ]','rollback plan attached to change'],
+ ['p','[pass]','runbook assigned update ring by department'],
+ ['h','[fp? ]','suspected false positive &rarr; investigating'],
+ ['dm','[rpt ]','Power BI dashboard refreshed'],
+ ['c','[crit]','no vendor fix &rarr; PowerShell mitigation pushed'],
+ ['p','[pass]','remediation SLA met']
+];
+const feed=$('#feed');let fi=0;
+if(!reduce) setInterval(()=>{
+  const [c,a,b]=feedLines[fi++%feedLines.length];
+  const d=document.createElement('div');d.innerHTML='<span class="'+c+'">'+a+'</span> '+b;
+  feed.appendChild(d);if(feed.children.length>5)feed.removeChild(feed.firstElementChild);
+},1700);
+
+/* ---------- terminal ---------- */
+const out=$('#termOut'), inp=$('#termInput');
+const hist=[];let hi=0;
+function line(html,cls){const d=document.createElement('div');d.className='ln'+(cls?' '+cls:'');d.innerHTML=html;out.appendChild(d);window.SFX&&SFX.tick();out.scrollTop=out.scrollHeight;}
+const C={
+  help:()=>['<span class="ac">available commands</span>',
+    '  <span class="pr">whoami</span>      short bio',
+    '  <span class="pr">skills</span>      tech stack by domain',
+    '  <span class="pr">experience</span>  roles and dates',
+    '  <span class="pr">impact</span>      headline metrics',
+    '  <span class="pr">certs</span>       certifications',
+    '  <span class="pr">education</span>   degrees',
+    '  <span class="pr">scan</span>        run a (simulated) vuln scan',
+    '  <span class="pr">contact</span>     how to reach me',
+    '  <span class="pr">goto</span> &lt;section&gt;  jump to a section',
+    '  <span class="pr">clear</span>       clear the screen'],
+  whoami:()=>['<span class="ok">Kiran Koppusety</span> &middot; Cybersecurity Engineer',
+    'Vulnerability Management Specialist @ Core Specialty',
+    '4+ yrs across security, backend, full-stack and data engineering.',
+    'Cincinnati, OH'],
+  skills:()=>SK.map(s=>'<span class="pr">'+s.n.padEnd(22)+'</span>'+s.i.join(', ')),
+  experience:()=>JOBS.map(j=>'<span class="am">'+j.d.padEnd(22)+'</span><span class="ok">'+j.r+'</span> @ '+j.c),
+  impact:()=>['<span class="ac">-96%</span>  MTTR critical vulns','<span class="am">-89%</span>  MTTR high vulns','<span class="pr">$85K</span>  annual Azure savings','<span class="ok">-80%</span>  API response time'],
+  certs:()=>['[x] Qualys Certified Specialist','[x] CompTIA Security+','[x] Microsoft Certified: Cloud and AI Security Engineer Associate (SC-500)'],
+  education:()=>['MS Cybersecurity &amp; Information Assurance &middot; Univ. of Central Missouri &middot; 2024','B.Tech Mechanical Engineering &middot; Centurion University &middot; 2021'],
+  contact:()=>['email  <span class="pr">kirankoppusety@gmail.com</span>','status <span class="ok">open to opportunities</span>'],
+  ls:()=>['whoami  impact  pipeline  log  stack  cases  notes  contact'],
+  date:()=>[new Date().toString()],
+  pwd:()=>['/home/kiran/portfolio'],
+  echo:a=>[esc(a.join(' '))],
+  clear:()=>{out.innerHTML='';return[];},
+  exit:()=>['nice try. there is no escape from a good portfolio.']
+};
+function scan(){
+  const steps=[['dm','[*] enumerating assets ... 1,248 endpoints'],['dm','[*] correlating threat intel ...'],['ac','[!] CVE flagged: exploited in the wild &middot; TruRisk 910'],['am','[!] 3 high findings &middot; QDS 72-84'],['pr','[>] packaging fix &rarr; Intune ring 0 (pilot)'],['ok','[+] telemetry clean &rarr; promoting to ring 1..3'],['ok','[+] verified in Sentinel. MTTR: down 96%.'],['dm','    (simulation for demo purposes)']];
+  steps.forEach((s,i)=>setTimeout(()=>line('<span class="'+s[0]+'">'+s[1]+'</span>'),reduce?0:i*380));
+}
+function run(raw){
+  const cmd=raw.trim(); line('<span class="pr">kiran@sec-ops:~$</span> '+esc(cmd));
+  if(!cmd) return;
+  hist.push(cmd);hi=hist.length;
+  const [c,...a]=cmd.toLowerCase().split(/\s+/);
+  if(cmd.toLowerCase().replace(/\s+/g,' ')==='sudo hire kiran'){line('<span class="ok">[sudo] access granted.</span> opening contact channel...');setTimeout(()=>location.hash='#contact',700);return;}
+  if(c==='sudo'){line('<span class="ac">kiran is not in the sudoers file. this incident will be reported.</span> (hint: sudo hire kiran)');return;}
+  if(c==='scan') return scan();
+  if(c==='goto'){const id=a[0]&&a[0].replace(/^\//,'');const el=id&&document.getElementById(id);if(el){el.scrollIntoView({behavior:reduce?'auto':'smooth'});line('<span class="ok">-&gt; /'+esc(id)+'</span>');}else line('usage: goto &lt;whoami|impact|pipeline|log|stack|cases|notes|contact&gt;');return;}
+  const f=C[c];
+  if(f) f(a).forEach(l=>line(l)); else line('<span class="ac">command not found:</span> '+esc(c)+' &middot; try <span class="pr">help</span>');
+}
+$('#termForm').addEventListener('submit',e=>{e.preventDefault();run(inp.value);inp.value='';});
+inp.addEventListener('keydown',e=>{
+  if(e.key==='ArrowUp'){if(hi>0){hi--;inp.value=hist[hi];}e.preventDefault();}
+  else if(e.key==='ArrowDown'){if(hi<hist.length-1){hi++;inp.value=hist[hi];}else{hi=hist.length;inp.value='';}e.preventDefault();}
+  else if(e.key==='Tab'){const m=Object.keys(C).concat(['scan','goto']).filter(k=>k.startsWith(inp.value));if(m.length===1){inp.value=m[0];}e.preventDefault();}
+});
+['help','whoami','skills','impact','scan','sudo hire kiran'].forEach(c=>{const b=document.createElement('button');b.className='chip';b.type='button';b.textContent=c;b.addEventListener('click',()=>{run(c);});$('#termChips').appendChild(b);});
+$('#term').addEventListener('click',e=>{if(!e.target.closest('button'))inp.focus({preventScroll:true});});
+
+/* ---------- data ---------- */
+const SK=[
+ {n:'Vulnerability Mgmt',k:'sec',i:['Qualys VMDR','Qualys Patch Management','Qualys TruRisk / QDS','SentinelOne']},
+ {n:'Endpoint & Cloud Mgmt',k:'sec',i:['Microsoft Intune','Azure Update Manager','Azure Automation Runbooks','Group Policy (GPO)','Azure Virtual Desktop']},
+ {n:'SIEM & Monitoring',k:'sec',i:['Microsoft Sentinel','Microsoft Defender']},
+ {n:'AWS & Serverless',k:'cloud',i:['AWS Lambda','API Gateway','Serverless Framework']},
+ {n:'Infra & DevOps',k:'cloud',i:['Terraform','Docker','Kubernetes','Jenkins','Tekton','SonarQube','Git']},
+ {n:'Languages',k:'code',i:['PowerShell','Python','C++','SQL','JavaScript']},
+ {n:'Web & APIs',k:'code',i:['React.js','Node.js','Express.js','PostgreSQL','Keycloak SSO / RBAC','Pytest','Jest']},
+ {n:'Data & Analytics',k:'data',i:['Power BI','Databricks','Informatica PowerCenter','Apache Airflow','DBT','Amazon Redshift']},
+ {n:'Ticketing & Docs',k:'data',i:['Jira','Confluence','SharePoint']}
+];
+const FILT=[['all','All'],['sec','Security'],['cloud','Cloud & DevOps'],['code','Code'],['data','Data & Ops']];
+const grid=$('#stackGrid');
+grid.innerHTML=SK.map(s=>'<div class="sk" data-k="'+s.k+'"><h3>'+esc(s.n)+'</h3><div class="items">'+s.i.map(x=>'<span>'+esc(x)+'</span>').join('')+'</div></div>').join('');
+$('#filters').innerHTML=FILT.map((f,i)=>'<button type="button" class="chip'+(i?'':' on')+'" data-f="'+f[0]+'">'+f[1]+'</button>').join('');
+$('#filters').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;$$('#filters .chip').forEach(x=>x.classList.toggle('on',x===b));const f=b.dataset.f;$$('.sk').forEach(s=>s.classList.toggle('dim',f!=='all'&&s.dataset.k!==f));});
+
+const JOBS=[
+ {id:'core',c:'Core Specialty',r:'Vulnerability Management Specialist',d:'Jan 2025 - Present',loc:'Cincinnati, OH',
+  s:'Enterprise-wide vulnerability remediation, endpoint security and update governance across Windows endpoints and Windows Server, using Qualys, Intune, Azure and Microsoft Sentinel.',
+  b:['Built patch remediation automation with Qualys and Intune, cutting MTTR by 96% for critical and 89% for high-severity vulnerabilities.',
+     'Developed Azure Automation runbooks that categorize devices by department and job title and assign update rings, security policies and required apps.',
+     'Prioritized remediation using Qualys TruRisk, QDS, exploitability and asset criticality, fast-tracking actively exploited CVEs.',
+     'Wrote PowerShell to automate vulnerability fixes, application ACL changes and endpoint configuration enforcement.',
+     'Designed phased patch deployments with Intune update rings and rollback plans; delivered an enterprise Secure Boot certificate update through change control.',
+     'Validated remediation with Sentinel endpoint telemetry, investigated false positives and documented risk exceptions.',
+     'Built executive Power BI dashboards for security and reliability metrics.',
+     'Created a Terraform framework to provision AVD and remove stale Azure resources, saving about $85,000 a year.'],
+  t:['Qualys','Intune','Sentinel','Azure Automation','PowerShell','Terraform','AVD','Power BI']},
+ {id:'fox',c:'Systech Solutions',cl:'Client: Fox Corporation',r:'Software Engineer',d:'Jul 2021 - Apr 2023',loc:'Chennai, India',
+  s:'Backend API development, cloud infrastructure and CI/CD on AWS for Fox Corporation\'s advertising planning and reporting platform.',
+  b:['Built Python REST APIs on AWS Lambda, API Gateway and the Serverless Framework for scenario modeling, revenue projections and portfolio reporting.',
+     'Implemented PostgreSQL query logic and Pandas transformations for scenario calculations and pricing overrides.',
+     'Built a parallel report pipeline with Python multiprocessing, reducing API response time by 80%.',
+     'Used distributed queues to coordinate concurrent requests and handle transaction conflicts.',
+     'Wrote reusable request validation with JSON Schema, returning structured errors.',
+     'Created a Pytest regression framework across GET, POST and DELETE workflows.',
+     'Shipped services with Docker, Kubernetes and Terraform, with Tekton CI/CD and SonarQube quality gates.'],
+  t:['Python','AWS Lambda','API Gateway','PostgreSQL','Pandas','Docker','Kubernetes','Tekton','SonarQube']},
+ {id:'nxt',c:'Nxtwave Technologies',r:'Full-Stack Developer',d:'Sep 2020 - Jun 2021',loc:'Hyderabad, India',
+  s:'Full-stack web development, authentication and API architecture, and CI/CD automation.',
+  b:['Built a request-management portal in React, Node.js and Express, cutting processing time from 20 to 6 minutes.',
+     'Integrated Keycloak with Active Directory for SSO and role-based access control.',
+     'Built REST APIs with PostgreSQL indexing and pagination, serving 10,000 daily requests at 0.3s.',
+     'Cut initial page load from 8s to 2s with code splitting, lazy loading and debounced calls.',
+     'Automated tests with Jest, React Testing Library and Supertest across 25 critical workflows, saving 8 hours per release.',
+     'Containerized services and built Jenkins pipelines for Kubernetes deployments.',
+     'Designed DBT and Amazon Redshift data models processing millions of records daily.'],
+  t:['React','Node.js','Express','Keycloak','PostgreSQL','Jest','Jenkins','Kubernetes','DBT','Redshift']},
+ {id:'ce',c:'CloudEarl',r:'Data Engineer Intern',d:'Jan 2020 - May 2020',loc:'Visakhapatnam, India',
+  s:'Enterprise data warehousing and reporting through ETL development, workflow automation and database tuning.',
+  b:['Built Informatica PowerCenter ETL integrating Salesforce, API, database and flat-file data at 99.9% accuracy.',
+     'Automated ingestion and validation with Apache Airflow, improving data consistency by 40%.',
+     'Optimized stored procedures, reducing ETL runtimes by 45%.',
+     'Tuned SQL queries for a 25% gain in retrieval performance.',
+     'Cut analytical query time by 50% with result caching and dynamic compute scaling.'],
+  t:['Informatica','Airflow','SQL Server','IRIS DW','SQL']}
+];
+$('#tabs').innerHTML=JOBS.map((j,i)=>'<button type="button" class="tab" role="tab" id="tab-'+j.id+'" aria-controls="job-'+j.id+'" aria-selected="'+(i===0)+'"><b>'+esc(j.c)+'</b><small>'+j.d+'</small></button>').join('');
+$('#jobs').innerHTML=JOBS.map((j,i)=>'<div class="job'+(i===0?' on':'')+'" id="job-'+j.id+'" role="tabpanel" aria-labelledby="tab-'+j.id+'"><div class="job-h"><h3>'+esc(j.r)+' <span>@ '+esc(j.c)+'</span></h3><div class="meta">'+(j.cl?esc(j.cl)+' &middot; ':'')+j.loc+' &middot; '+j.d+'</div></div><p class="sum">'+esc(j.s)+'</p><ul>'+j.b.map((x,k)=>'<li data-i="'+String(k+1).padStart(2,'0')+'">'+esc(x)+'</li>').join('')+'</ul><div class="tools">'+j.t.map(x=>'<span class="pill">'+esc(x)+'</span>').join('')+'</div></div>').join('');
+function selJob(id){$$('#tabs .tab').forEach(t=>t.setAttribute('aria-selected',t.id==='tab-'+id));$$('#jobs .job').forEach(p=>p.classList.toggle('on',p.id==='job-'+id));}
+$('#tabs').addEventListener('click',e=>{const t=e.target.closest('.tab');if(t)selJob(t.id.slice(4));});
+$('#tabs').addEventListener('keydown',e=>{if(!/Arrow(Up|Down|Left|Right)/.test(e.key))return;const ts=$$('#tabs .tab');let i=ts.findIndex(t=>t.getAttribute('aria-selected')==='true');i=(i+(/Down|Right/.test(e.key)?1:-1)+ts.length)%ts.length;ts[i].focus();selJob(ts[i].id.slice(4));e.preventDefault();});
+
+/* pipeline */
+const ST=[
+ {n:'Detect',s:'Qualys VMDR',h:'Find every exposure',p:'Continuous scanning builds a live picture of vulnerabilities across Windows endpoints and servers.',l:['Asset inventory kept in sync with the scanner','Findings mapped to owners and business units','Scanner noise triaged before it becomes tickets'],t:['Qualys VMDR','SentinelOne','Defender'],note:['Signal','Every finding','Detection without triage is just a longer list.']},
+ {n:'Prioritize',s:'TruRisk + QDS',h:'Fix what attackers use first',p:'Risk-based ranking combines Qualys TruRisk and QDS with exploitability, threat intel and asset criticality.',l:['Actively exploited CVEs fast-tracked','Internet-facing and critical assets weighted up','Threat intelligence feeds into the queue daily'],t:['Qualys TruRisk','QDS','Threat intel'],note:['Rule','Exploited first','A lower CVSS bug that is being exploited beats a higher one that is not.']},
+ {n:'Automate',s:'PowerShell + Runbooks',h:'Script the fix once',p:'Fixes become code: PowerShell for configuration and ACL changes, Azure Automation runbooks for targeting.',l:['Vulnerability fixes packaged as scripts and Win32 apps','Runbooks assign rings, policies and apps by department and job title','Repeatable, reviewable, version-controlled'],t:['PowerShell','Azure Automation','Intune Win32'],note:['Outcome','Fewer manual steps','Onboarding and remediation stop depending on who is on shift.']},
+ {n:'Deploy',s:'Intune update rings',h:'Roll out in rings',p:'Patches move from a pilot ring to broad deployment, each with a rollback plan and change control.',l:['Pilot ring first, then broader rings','Rollback plan written before rollout','High-risk changes such as Secure Boot certificates go through production change control'],t:['Intune','Update rings','Azure Update Manager','GPO'],note:['Result','-96% MTTR','For critical vulnerabilities, and -89% for high severity.']},
+ {n:'Validate',s:'Sentinel telemetry',h:'Prove it worked',p:'Endpoint telemetry in Microsoft Sentinel confirms the fix landed. Anything that cannot be patched gets a documented exception.',l:['Telemetry-based verification, not just deployment status','Suspected false positives investigated','Risk exceptions documented with justification'],t:['Microsoft Sentinel','KQL','Defender'],note:['Standard','Evidence','Closed means verified, not just deployed.']},
+ {n:'Report',s:'Power BI',h:'Make risk visible',p:'Executive dashboards track security and reliability metrics so leadership can set priorities with real data.',l:['MTTR and SLA compliance by severity','Remediation progress tracking','Inputs for prioritization decisions'],t:['Power BI','Jira','Confluence'],note:['Audience','Leadership','Clear metrics keep remediation funded and prioritized.']}
+];
+$('#pipe').innerHTML=ST.map((s,i)=>'<button type="button" class="stage" role="tab" id="st-'+i+'" aria-selected="'+(i===0)+'"><span class="node">'+String(i+1).padStart(2,'0')+'</span><span class="nm">'+s.n+'</span><span class="sub">'+s.s+'</span></button>').join('');
+function selStage(i){
+  const s=ST[i];
+  $$('#pipe .stage').forEach((b,k)=>b.setAttribute('aria-selected',k===i));
+  $('#stagePanel').setAttribute('aria-labelledby','st-'+i);
+  $('#stagePanel').innerHTML='<div class="hud-h"><span>Stage '+String(i+1).padStart(2,'0')+' / 06</span><span style="color:var(--cyan)">'+s.n+'</span></div><h3>'+s.h+'</h3><p>'+s.p+'</p><ul>'+s.l.map(x=>'<li>'+x+'</li>').join('')+'</ul><div class="tools">'+s.t.map((x,k)=>'<span class="pill'+(k%2?' p':'')+'">'+x+'</span>').join('')+'</div>';
+  $('#stageNote').innerHTML='<small>'+s.note[0]+'</small><div class="big">'+s.note[1]+'</div><p>'+s.note[2]+'</p>';
+}
+selStage(0);
+$('#pipe').addEventListener('click',e=>{const b=e.target.closest('.stage');if(b)selStage(+b.id.slice(3));});
+$('#pipe').addEventListener('keydown',e=>{if(!/Arrow(Left|Right)/.test(e.key))return;const bs=$$('#pipe .stage');let i=bs.findIndex(b=>b.getAttribute('aria-selected')==='true');i=(i+(e.key==='ArrowRight'?1:-1)+bs.length)%bs.length;bs[i].focus();selStage(i);e.preventDefault();});
+
+/* terminal boot (after data is defined) */
+line('<span class="dm">SecOps shell v2.6 &middot; type </span><span class="pr">help</span><span class="dm"> or tap a command below</span>');
+run('whoami');
+
+/* copy email */
+$('#copyEmail').addEventListener('click',()=>{
+  const v=$('#email').textContent;
+  const fallback=()=>{const r=document.createRange();r.selectNodeContents($('#email'));const s=getSelection();s.removeAllRanges();s.addRange(r);say('Selected. Press Ctrl+C to copy');};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(v).then(()=>{say('Email copied');window.SFX&&SFX.chime(.5);},fallback);}else fallback();
+});
+
+/* reveal + counters + nav highlight */
+if(!reduce && 'IntersectionObserver' in window){
+  const els=$$('.reveal').filter(el=>el.getBoundingClientRect().top>innerHeight);
+  els.forEach(el=>el.classList.add('pre'));
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.remove('pre');io.unobserve(e.target);}}),{rootMargin:'0px 0px -8% 0px'});
+  els.forEach(el=>io.observe(el));
+  setTimeout(()=>els.forEach(el=>el.classList.remove('pre')),6000);
+
+  const co=new IntersectionObserver(es=>es.forEach(e=>{
+    if(!e.isIntersecting)return;co.unobserve(e.target);
+    const el=e.target,end=+el.dataset.count,st=performance.now(),d=1300;
+    (function f(n){const p=Math.min((n-st)/d,1);const v=Math.round(end*(1-Math.pow(1-p,3)));if(v!==+el.textContent&&v%3===0&&window.SFX)SFX.tick();el.textContent=v;if(p<1)requestAnimationFrame(f);})(st);
+  }),{threshold:.6});
+  $$('[data-count]').forEach(el=>co.observe(el));
+
+  $$('.tilt').forEach(c=>{
+    c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform='perspective(900px) rotateX('+(-y*5)+'deg) rotateY('+(x*6)+'deg) translateY(-3px)';});
+    c.addEventListener('pointerleave',()=>{c.style.transform='';});
+  });
+}
+const links=$$('#navList a');
+const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id));}}),{rootMargin:'-45% 0px -50% 0px'});
+$$('main section[id]').forEach(s=>so.observe(s));
+})();
+</script>
+<script>
+/* ---------- landing + sound wiring ---------- */
+(function(){
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const L=document.getElementById('landing'),body=document.body,cv=document.getElementById('net'),c=cv.getContext('2d');
+const sndBtn=document.getElementById('sndBtn'),sndLab=document.getElementById('sndLab');
+let W,H,dpr,nodes=[],mx=-999,my=-999,running=false;
+
+/* node network background */
+function size(){dpr=Math.min(devicePixelRatio||1,2);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;c.setTransform(dpr,0,0,dpr,0,0);
+  const n=Math.round(Math.min(110,Math.max(36,W*H/15000)));
+  nodes=Array.from({length:n},(_,i)=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,p:i%7===0}));}
+function frame(){
+  c.clearRect(0,0,W,H);
+  const R=140,R2=R*R;
+  for(const a of nodes){
+    if(!reduce){a.x+=a.vx;a.y+=a.vy;if(a.x<0||a.x>W)a.vx*=-1;if(a.y<0||a.y>H)a.vy*=-1;}
+    const dx=a.x-mx,dy=a.y-my,d2=dx*dx+dy*dy;
+    if(d2<22000&&!reduce){const d=Math.sqrt(d2)||1;a.x+=dx/d*.6;a.y+=dy/d*.6;}
+  }
+  c.lineWidth=1;
+  for(let i=0;i<nodes.length;i++){const a=nodes[i];
+    for(let j=i+1;j<nodes.length;j++){const b=nodes[j],dx=a.x-b.x,dy=a.y-b.y,d2=dx*dx+dy*dy;
+      if(d2<R2){const al=(1-Math.sqrt(d2)/R)*.28;c.strokeStyle=(a.p||b.p)?'rgba(255,46,126,'+al+')':'rgba(53,233,255,'+al+')';c.beginPath();c.moveTo(a.x,a.y);c.lineTo(b.x,b.y);c.stroke();}}
+    const dx=a.x-mx,dy=a.y-my,d=Math.sqrt(dx*dx+dy*dy);
+    if(d<190){c.strokeStyle='rgba(53,233,255,'+(1-d/190)*.45+')';c.beginPath();c.moveTo(a.x,a.y);c.lineTo(mx,my);c.stroke();}
+    c.fillStyle=a.p?'#FF2E7E':'rgba(53,233,255,.85)';c.fillRect(a.x-1.2,a.y-1.2,2.4,2.4);
+  }
+  if(running&&!reduce)requestAnimationFrame(frame);
+}
+function start(){if(running)return;running=true;size();requestAnimationFrame(frame);}
+addEventListener('resize',()=>{if(running)size();});
+L.addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;});
+L.addEventListener('pointerleave',()=>{mx=my=-999;});
+
+/* clock */
+const clk=document.getElementById('lClock');
+function tickClock(){const d=new Date();clk.textContent=d.toISOString().slice(11,19);}
+tickClock();setInterval(tickClock,1000);
+
+/* name decode effect */
+const G='!<>-_\\/[]{}=+*^?#01';
+function scramble(el){const t=el.dataset.t;let f=0;const total=26;
+  (function step(){f++;el.textContent=t.split('').map((ch,i)=>f>=total*(i+1)/t.length?ch:G[Math.floor(Math.random()*G.length)]).join('');
+    if(f<total)setTimeout(step,40);else el.textContent=t;})();}
+if(!reduce)document.querySelectorAll('.scr').forEach((el,i)=>setTimeout(()=>scramble(el),250+i*260));
+
+/* sound button */
+function syncBtn(on){sndBtn.setAttribute('aria-pressed',on);sndLab.textContent=on?'SOUND ON':'SOUND OFF';}
+document.addEventListener('sfx',e=>syncBtn(e.detail));
+sndBtn.addEventListener('click',()=>{const v=!SFX.isOn();SFX.set(v);if(v)SFX.click();});
+
+/* enter / reopen */
+function enter(withSound,btn){
+  if(L.hidden||L.classList.contains('opening'))return;
+  if(withSound){SFX.set(true);SFX.click();}
+  if(btn){const r=btn.getBoundingClientRect();L.style.setProperty('--ox',(r.left+r.width/2)+'px');L.style.setProperty('--oy',(r.top+r.height/2)+'px');}
+  L.classList.add('opening');body.classList.remove('locked');body.classList.add('entered');
+  setTimeout(()=>{L.hidden=true;running=false;},reduce?0:1200);
+}
+function reopen(){
+  L.classList.remove('opening');L.hidden=false;body.classList.add('locked');body.classList.remove('entered');
+  if(SFX.isOn())SFX.whoosh(1);start();
+  setTimeout(()=>document.getElementById('enterBtn').focus({preventScroll:true}),50);
+}
+document.getElementById('enterBtn').addEventListener('click',e=>enter(true,e.currentTarget));
+document.querySelector('.brand').addEventListener('click',e=>{e.preventDefault();scrollTo(0,0);reopen();});
+addEventListener('keydown',e=>{if(!L.hidden&&!L.classList.contains('opening')&&e.key==='Escape')enter(false);});
+
+/* deep links skip the landing */
+const hash=location.hash.slice(1);
+if(hash&&hash!=='top'&&document.getElementById(hash)){L.hidden=true;}
+else{body.classList.add('locked');start();setTimeout(()=>document.getElementById('enterBtn').focus({preventScroll:true}),60);}
+
+/* global sound hooks */
+const HSEL='a,button,.metric,.case,.note summary,.sk,.kv';
+let lastEl=null;
+document.addEventListener('pointerover',e=>{const el=e.target.closest(HSEL);if(el&&el!==lastEl){lastEl=el;SFX.hover();}if(!el)lastEl=null;});
+document.addEventListener('click',e=>{const el=e.target.closest('a,button,summary');if(!el)return;
+  if(el.id==='enterBtn'||el.id==='sndBtn'||el.classList.contains('brand'))return;
+  if(el.tagName==='A'&&el.getAttribute('href')&&el.getAttribute('href').startsWith('#')){SFX.whoosh(.7);}
+  SFX.click();});
+document.getElementById('termInput').addEventListener('keydown',e=>{if(e.key.length===1||e.key==='Backspace'||e.key==='Enter')SFX.key();});
+})();
+</script>
+
+
+</body>
+</html>
